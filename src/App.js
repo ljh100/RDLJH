@@ -47,11 +47,7 @@ class App extends Component {
           customers.map(c => {
             return(
                 <Customer
-                id={c.id}
-                image={c.image}
-                name={c.name}
-                birthday={c.birthday}
-                address={c.address}
+                id={c.id} image={c.image} name={c.name} birthday={c.birthday} address={c.address}
                 />
             );
           }
