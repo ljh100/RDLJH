@@ -1,20 +1,17 @@
 {
     "name": "management",
-    "version":"1.0.0",
-    "scripts":{
-        "client":"cd client && yarn start",
+    "version": "1.0.0",
+    "scripts": {
+        "client": "cd client && yarn start",
         "server": "nodemon server.js",
         "dev": "concurrently --kill-others-on-fail \"yarn start\" \"yarn client\""
-
-
     },
     "dependencies": {
         "body-parser": "^1.18.3",
-        "express": "^4.16.4"
+        "express": "^4.16.4",
+        "mysql": "^2.16.0"
     },
     "devDependencies": {
         "concurrently": "^4.0.1"
-
     }
-
 }
