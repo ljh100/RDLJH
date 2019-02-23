@@ -22,31 +22,46 @@ const styles=theme=>(
   }
 )
 
-const customers=[
-{
-  'id':1,
-  'image':'http://placeimg.com/64/64/1',
-  'name':'이준희11s',
-  'birthday':'19601015',
-  'address':'11134d.. thornhill wood'
-},
-{
-  'id':2,
-  'image':'http://placeimg.com/64/64/2',
-  'name':'이준희22s',
-  'birthday':'19601015',
-  'address':'22234d.. thornhill wood'
-},
-{
-  'id':3,
-  'image':'http://placeimg.com/64/64/3',
-  'name':'이준희33s',
-  'birthday':'19601015',
-  'address':'33334d.. thornhill wood'
-}
-]
+// const customers=[
+// {
+//   'id':1,
+//   'image':'http://placeimg.com/64/64/1',
+//   'name':'이준희11s',
+//   'birthday':'19601015',
+//   'address':'11134d.. thornhill wood'
+// },
+// {
+//   'id':2,
+//   'image':'http://placeimg.com/64/64/2',
+//   'name':'이준희22s',
+//   'birthday':'19601015',
+//   'address':'22234d.. thornhill wood'
+// },
+// {
+//   'id':3,
+//   'image':'http://placeimg.com/64/64/3',
+//   'name':'이준희33s',
+//   'birthday':'19601015',
+//   'address':'77774d.. thornhill wood'
+// }
+// ]
 
 class App extends Component {
+  state = {
+    customers:
+    ""
+  }
+
+  componentDidMount(){
+    this.callApi()
+    .then(res => this.setState({customers: res}))
+    .catch(err => console.log(err));
+  }
+  callApi = async () => {
+    const response = await fetch('/api/customers');
+    const body = await response.json();
+    return body;
+  }
   render() {
     const {classes} = this.props;
     return (
@@ -78,7 +93,19 @@ class App extends Component {
               </TableHead>
               <TableBody>
                 {
-                  customers.map(c => {
+                  // customers.map(c => {
+                  //   return (
+                  //      <Customer
+                  //         key={c.id}
+                  //         id={c.id}
+                  //         name={c.name} 
+                  //         image={c.image}
+                  //         birthday={c.birthday}
+                  //         address={c.address}
+                  //      /> 
+                  //   );
+                  // })
+                  this.state.customers ? this.state.customers.map(c => {
                     return (
                        <Customer
                           key={c.id}
@@ -89,8 +116,9 @@ class App extends Component {
                           address={c.address}
                        /> 
                     );
-                  })
+                  }) : "" 
                 }
+              
               </TableBody>
             </Table>
             </Paper>
